@@ -1,8 +1,5 @@
 package promises.aplus {
-import com.codecatalyst.promise.CodeCatalystSpecAdapter;
-
 import flash.utils.clearTimeout;
-
 import flash.utils.setTimeout;
 
 import org.flexunit.*;
@@ -29,6 +26,7 @@ public class BasePromiseSpec {
         specUnderTest.alreadyFulfilled(value, test, done);
     }
 
+/*
     public static function immediatelyFulfilled(value:*, test:Function, done:Function):void {
         specUnderTest.immediatelyFulfilled(value, test, done);
     }
@@ -48,6 +46,7 @@ public class BasePromiseSpec {
     public static function eventuallyRejected(reason:*, test:Function, done:Function):void {
         specUnderTest.eventuallyRejected(reason, test, done);
     }
+*/
 
     protected var dummy:Object = {dummy: "dummy"};// we fulfill or reject with this when we don't intend to test against it
 
@@ -60,7 +59,7 @@ public class BasePromiseSpec {
         return _done;
     }
 
-    protected function expectAsync():void {
+    public function expectAsync():void {
         //noinspection JSUnusedLocalSymbols
         var initializedNow:Function = done;
     }
@@ -68,8 +67,8 @@ public class BasePromiseSpec {
 
     [Before]
     public final function setUpAdapter():void{
-        //TODO is there a more flexible way to test another implementation then to change the next line?
-        specUnderTest = new CodeCatalystSpecAdapter();
+        
+        specUnderTest = SpecAdapter.createInstance();
         assertNotNull("adapter implementation",specUnderTest);
         
         var d:Deferred = deferred();
@@ -87,6 +86,7 @@ public class BasePromiseSpec {
         return 300;
     }
 
+    //noinspection JSMethodCanBeStatic
     protected function get tick():Number {
         return 5;
     }
@@ -123,11 +123,11 @@ public class BasePromiseSpec {
         }
     }
 
-
+    protected var executedTestInstance:Object;
     private function createAsyncHandler(usage:*, handler:Function = null):Function {
         var currentList:Array = asyncHandlers;
         var index:uint = asyncHandlers.length;
-        var asyncHandle:Function = Async.asyncHandler(this, function (...___):void {
+        var asyncHandle:Function = Async.asyncHandler(executedTestInstance || this, function (...___):void {
             if (handler != null) {
                 handler();
             }
@@ -155,16 +155,16 @@ public class BasePromiseSpec {
             usage.ticked++;
             clearTimeout(timoutId);
 
-            if (ticks == usage.ticked) {
-                timoutId = setTimeout(function doneInRightOrder():void{
-                    if(execute){
+            if (usage.ticked >= ticks) {
+                timoutId = setTimeout(function doneInRightOrder():void {
+                    if (Boolean(execute)) {
                         execute()
                     }
                     afterTickDone();
                     clearTimeout(timoutId)
-                },tick);
+                }, tick);
             } else {
-                timoutId = setTimeout(loop,tick);
+                timoutId = setTimeout(loop, tick);
             }
         }
 

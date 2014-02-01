@@ -1,14 +1,12 @@
 package promises.aplus {
 
-import flash.utils.clearTimeout;
-import flash.utils.setTimeout;
+import com.codecatalyst.promise.CodeCatalystSpecAdapter;
 
 public class SpecAdapter {
 
-    public static var UnderTest:Class;
-
     public static function createInstance():SpecAdapter {
-        return new UnderTest();
+        //TODO is there a more flexible way to test another implementation then to change the next line?
+        return new CodeCatalystSpecAdapter();
     }
 
     protected function createDeferred():* {
@@ -34,6 +32,7 @@ public class SpecAdapter {
         test(resolved(value), done)
     }
 
+/*
     public final function immediatelyFulfilled(value:*, test:Function, done:Function):void {
         var d:Deferred = deferred();
         test(d.promise, done);
@@ -67,6 +66,7 @@ public class SpecAdapter {
             d.reject(reason);
         }, 50);
     }
+*/
 
 }
 }
