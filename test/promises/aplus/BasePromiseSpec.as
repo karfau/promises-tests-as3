@@ -1,8 +1,13 @@
 package promises.aplus {
 import com.codecatalyst.promise.CodeCatalystSpecAdapter;
 
+import flash.utils.clearTimeout;
+
+import flash.utils.setTimeout;
+
 import org.flexunit.*;
 import org.flexunit.asserts.*;
+import org.flexunit.async.Async;
 import org.hamcrest.core.*;
 import org.hamcrest.object.*;
 
@@ -44,6 +49,22 @@ public class BasePromiseSpec {
         specUnderTest.eventuallyRejected(reason, test, done);
     }
 
+    protected var dummy:Object = {dummy: "dummy"};// we fulfill or reject with this when we don't intend to test against it
+
+    private var _done:Function;
+    protected function get done():Function {
+        if (_done == null) {
+            _done = createAsyncHandler('done');
+        }
+
+        return _done;
+    }
+
+    protected function expectAsync():void {
+        //noinspection JSUnusedLocalSymbols
+        var initializedNow:Function = done;
+    }
+
 
     [Before]
     public final function setUpAdapter():void{
@@ -56,10 +77,102 @@ public class BasePromiseSpec {
         d.implementingInstance, allOf(isNotNull(),not(equalTo(deferred().implementingInstance))))
     }
 
-    [Before]
+    [After]
     public final function tearDownAdapter():void{
         specUnderTest = null;
     }
+
+    //noinspection JSMethodCanBeStatic
+    protected function get asyncTimeout():Number {
+        return 300;
+    }
+
+    protected function get tick():Number {
+        return 5;
+    }
+
+    private var asyncHandlers:Array;
+
+    [Before]
+    public function setUpAsync():void {
+        asyncHandlers = [];
+    }
+
+    [After]
+    public function tearDownAsync():void {
+
+        var incompleteAsyncs:Array = [];
+        var usage:String;
+        for each (var object:Object in asyncHandlers) {
+            if (!object.completed) {
+                if(object.usage is String){
+                    usage = object.usage;
+                }else{
+                    usage = "{ origin: "+object.usage.origin+", ticks: "+object.usage.ticks+", ticked: "+object.usage.ticked+" }"
+                }
+                incompleteAsyncs.push("{usage: "+object.usage+",start: "+object.start+"}");
+            }
+        }
+
+        asyncHandlers = null;
+
+        //throws AssertionError so do cleanup before
+        if (incompleteAsyncs.length > 0) {
+            var milliseconds:Number = new Date().getTime();
+            fail(incompleteAsyncs.length + " asyncHandlers were not called back @ " + milliseconds + ":\n\t" + incompleteAsyncs.join(",\n\t"));
+        }
+    }
+
+
+    private function createAsyncHandler(usage:*, handler:Function = null):Function {
+        var currentList:Array = asyncHandlers;
+        var index:uint = asyncHandlers.length;
+        var asyncHandle:Function = Async.asyncHandler(this, function (...___):void {
+            if (handler != null) {
+                handler();
+            }
+        }, asyncTimeout);
+        currentList[index] = {
+            usage: usage,
+            start: new Date().getTime(),
+            handle: asyncHandle,
+            completed: false
+        };
+        function asyncComplete():void {
+            currentList[index].completed = true;
+            asyncHandle();
+        }
+
+        return asyncComplete;
+    }
+
+    protected function afterTick(execute:Function, ticks:int = 1):void {
+        var usage:Object = { origin: 'afterTick', ticks: ticks, ticked: 0};
+
+        var afterTickDone:Function = createAsyncHandler(usage);
+        var timoutId:uint;
+        function loop():void {
+            usage.ticked++;
+            clearTimeout(timoutId);
+
+            if (ticks == usage.ticked) {
+                timoutId = setTimeout(function doneInRightOrder():void{
+                    if(execute){
+                        execute()
+                    }
+                    afterTickDone();
+                    clearTimeout(timoutId)
+                },tick);
+            } else {
+                timoutId = setTimeout(loop,tick);
+            }
+        }
+
+        timoutId = setTimeout(loop,tick);
+    }
     
+    
+
+
 }
 }
