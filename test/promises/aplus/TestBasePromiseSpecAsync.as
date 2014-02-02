@@ -202,6 +202,12 @@ public class TestBasePromiseSpecAsync {
         test.callAfterTicks(0,function nothing():void {});
         test.callDoneHandle();
     }
+
+    [Test(async)]
+    public function expectAsync_then_afterTicks_uses_done_everything_should_be_complete():void {
+        test.expectAsync();
+        test.callAfterTicks(0,test.getDoneHandle());
+    }
 }
 }
 

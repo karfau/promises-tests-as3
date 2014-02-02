@@ -115,7 +115,7 @@ public class BasePromiseSpec {
         //throws AssertionError so do cleanup before
         if (incompleteAsyncHandlers.length > 0) {
             var milliseconds:Number = new Date().getTime();
-            fail(incompleteAsyncHandlers.length + " asyncHandlers are still executing @ " + milliseconds + ":\n\t" + incompleteAsyncHandlers.join(",\n\t"));
+            fail(incompleteAsyncHandlers.length + " asyncHandlers are still executing @ " + milliseconds + ":\n" + incompleteAsyncHandlers.join(",\n"));
         }
     }
 

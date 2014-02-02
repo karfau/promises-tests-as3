@@ -49,7 +49,7 @@ public class _1_WhenFulfilledNoTransition extends BasePromiseSpec{
     [Test(async)]
     public function already_fulfilled():void {
         alreadyFulfilled(dummy, promiseHandler, done);
-        afterTick(done,2*tick);
+        afterTick(done,2);
     }
 
     [Test(async)]

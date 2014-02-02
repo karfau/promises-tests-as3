@@ -15,7 +15,7 @@ public class Promise {
         this.impl = impl;
     }
 
-    public function then(onFulfilled:*,onRejected:*):*{
+    public function then(onFulfilled:*=undefined,onRejected:*=undefined):*{
         return impl.then(onFulfilled,onRejected);
     }
 }
