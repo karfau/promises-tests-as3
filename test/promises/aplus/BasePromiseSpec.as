@@ -29,25 +29,25 @@ public class BasePromiseSpec {
         specUnderTest.alreadyFulfilled(value, test, done);
     }
 
-     public static function immediatelyFulfilled(value:*, test:Function, done:Function):void {
-     specUnderTest.immediatelyFulfilled(value, test, done);
-     }
+    public static function immediatelyFulfilled(value:*, test:Function, done:Function):void {
+        specUnderTest.immediatelyFulfilled(value, test, done);
+    }
 
-     public static function eventuallyFulfilled(value:*, test:Function, done:Function):void {
-     specUnderTest.eventuallyFulfilled(value, test, done);
-     }
+    public static function eventuallyFulfilled(value:*, test:Function, done:Function):void {
+        specUnderTest.eventuallyFulfilled(value, test, done);
+    }
 
-     public static function alreadyRejected(reason:*, test:Function, done:Function):void {
-     specUnderTest.alreadyRejected(reason, test, done);
-     }
+    public static function alreadyRejected(reason:*, test:Function, done:Function):void {
+        specUnderTest.alreadyRejected(reason, test, done);
+    }
 
-     public static function immediatelyRejected(reason:*, test:Function, done:Function):void {
-     specUnderTest.immediatelyRejected(reason, test, done);
-     }
+    public static function immediatelyRejected(reason:*, test:Function, done:Function):void {
+        specUnderTest.immediatelyRejected(reason, test, done);
+    }
 
-     public static function eventuallyRejected(reason:*, test:Function, done:Function):void {
-     specUnderTest.eventuallyRejected(reason, test, done);
-     }
+    public static function eventuallyRejected(reason:*, test:Function, done:Function):void {
+        specUnderTest.eventuallyRejected(reason, test, done);
+    }
 
     protected var dummy:Object = {dummy: "dummy"};// we fulfill or reject with this when we don't intend to test against it
 
@@ -125,7 +125,8 @@ public class BasePromiseSpec {
         var async:AsyncTestPartial = new AsyncTestPartial(
                 Async.asyncHandler(
                         executedTestInstance || this,
-                        function (...___):void {},
+                        function (...___):void {
+                        },
                         asyncTimeout
                 )
         );
@@ -138,11 +139,11 @@ public class BasePromiseSpec {
         if (_done == null) {
             throw new IllegalOperationError("afterTick was called but no asyncHandler was created. Read the docs about how to use expectAsync() and afterTick().")
         }
-        
+
         //noinspection UnnecessaryLocalVariableJS
         var async:AsyncTestPartial = new AsyncTestPartial(execute);
         asyncHandlers[asyncHandlers.length] = async;
-        
+
         var timeoutId:uint;
         var ticked:int = 0;
 

@@ -1,4 +1,4 @@
-package promises.aplus._2_2_states {
+package promises.aplus._2_1_states {
 
 import flash.utils.setTimeout;
 
