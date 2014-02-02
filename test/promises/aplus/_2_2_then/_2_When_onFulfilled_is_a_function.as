@@ -1,4 +1,7 @@
 package promises.aplus._2_2_then {
+import org.hamcrest.Matcher;
+import org.hamcrest.collection.array;
+
 import promises.aplus.*;
 
 import flash.utils.setTimeout;
@@ -91,6 +94,136 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
             assertFalse(onFulfilledCalled);
             done();
         }, 3);
+    }
+
+    [Test(async)]
+    public function it_must_not_be_called_more_then_once__already_fulfilled():void {
+        expectAsync();
+        var timesCalled:int = 0;
+
+        resolved(dummy).then(function onFulfilled():void {
+            timesCalled++;
+            assertThat(timesCalled, 1);
+            done();
+        });
+    }
+
+    [Test(async)]
+    public function it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__immediately():void {
+        expectAsync();
+        var d:Deferred = deferred();
+        var timesCalled:int = 0;
+        
+        d.promise.then(function onFulfilled():void {
+            timesCalled++;
+            assertThat(timesCalled, 1);
+            done();
+        });
+
+        d.resolve(dummy);
+        d.resolve(dummy);
+    }
+
+    [Test(async)]
+    public function it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__delayed():void {
+        expectAsync();
+        var d:Deferred = deferred();
+        var timesCalled:int = 0;
+        
+        d.promise.then(function onFulfilled():void {
+            timesCalled++;
+            assertThat(timesCalled, 1);
+            done();
+        });
+
+        setTimeout(function ():void {
+            d.resolve(dummy);
+            d.resolve(dummy);
+        }, 50);
+    }
+
+    [Test(async)]
+    public function it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__immediately_then_delayed():void {
+        expectAsync();
+        var d:Deferred = deferred();
+        var timesCalled:int = 0;
+        
+        d.promise.then(function onFulfilled():void {
+            timesCalled++;
+            assertThat(timesCalled, 1);
+            done();
+        });
+
+        d.resolve(dummy);
+        setTimeout(function ():void {
+            d.resolve(dummy);
+        }, 50);
+    }
+
+    [Test(async)]
+    public function it_must_not_be_called_more_then_once__when_multiple_then_calls_are_made__spaced_apart_in_time():void {
+        expectAsync();
+        var d:Deferred = deferred();
+        var timesCalled:Array = [0,0,0];
+
+        var matcher:Matcher = array(1,1,1);
+        function complete():void {
+            if(matcher.matches(timesCalled)){
+                done();
+            }
+        } 
+        
+        d.promise.then(function onFulfilled():void {
+            timesCalled[0]++;
+            assertThat(timesCalled[0], 1);
+            complete();
+        });
+        setTimeout(function ():void {
+            d.promise.then(function onFulfilled():void {
+                timesCalled[1]++;
+                assertThat(timesCalled[1], 1);
+                complete();
+            });
+        }, 50);
+        setTimeout(function ():void {
+            d.promise.then(function onFulfilled():void {
+                timesCalled[2]++;
+                assertThat(timesCalled[2], 1);
+                complete();
+            });
+        }, 100);
+
+        setTimeout(function ():void {
+            d.resolve(dummy);
+        }, 150);
+    }
+    [Test(async)]
+    public function it_must_not_be_called_more_then_once__when_then_is_interleaved_with_fulfillment():void {
+        expectAsync();
+        var d:Deferred = deferred();
+        var timesCalled:Array = [0,0];
+
+        var matcher:Matcher = array(1,1);
+        function complete():void {
+            if(matcher.matches(timesCalled)){
+                done();
+            }
+        } 
+        
+        d.promise.then(function onFulfilled():void {
+            timesCalled[0]++;
+            assertThat(timesCalled[0], 1);
+            complete();
+        });
+        
+        d.resolve(dummy);
+        
+        d.promise.then(function onFulfilled():void {
+            timesCalled[1]++;
+            assertThat(timesCalled[1], 1);
+            complete();
+        });
+
     }
 
 
