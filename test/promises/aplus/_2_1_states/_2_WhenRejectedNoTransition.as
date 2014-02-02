@@ -66,9 +66,7 @@ public class _2_WhenRejectedNoTransition extends BasePromiseSpec {
 
     [Test(async)]
     public function trying_to_reject_then_immediately_fulfill():void {
-        //this is untyped by intention so only the adapters and usages of Pomise need to be updated
-        //noinspection JSUntypedDeclaration
-        var d = deferred();
+        var d:Deferred = deferred();
         promiseHandler(d.promise, done);
         d.reject(dummy);
         d.resolve(dummy);
@@ -77,9 +75,7 @@ public class _2_WhenRejectedNoTransition extends BasePromiseSpec {
 
     [Test(async)]
     public function trying_to_reject_then_fulfill_delayed():void {
-        //this is untyped by intention so only the adapters and usages of Pomise need to be updated
-        //noinspection JSUntypedDeclaration
-        var d = deferred();
+        var d:Deferred = deferred();
         promiseHandler(d.promise, done);
         
         setTimeout(function ():void {
@@ -92,9 +88,7 @@ public class _2_WhenRejectedNoTransition extends BasePromiseSpec {
 
     [Test(async)]
     public function trying_to_reject_immediately_then_fulfill_delayed():void {
-        //this is untyped by intention so only the adapters and usages of Pomise need to be updated
-        //noinspection JSUntypedDeclaration
-        var d = deferred();
+        var d:Deferred = deferred();
         promiseHandler(d.promise,done);
         d.reject(dummy);
         setTimeout(function ():void {
