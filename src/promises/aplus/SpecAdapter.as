@@ -2,6 +2,9 @@ package promises.aplus {
 
 import com.codecatalyst.promise.CodeCatalystSpecAdapter;
 
+import flash.utils.clearTimeout;
+import flash.utils.setTimeout;
+
 public class SpecAdapter {
 
     public static function createInstance():SpecAdapter {
@@ -32,7 +35,6 @@ public class SpecAdapter {
         test(resolved(value), done)
     }
 
-/*
     public final function immediatelyFulfilled(value:*, test:Function, done:Function):void {
         var d:Deferred = deferred();
         test(d.promise, done);
@@ -66,7 +68,6 @@ public class SpecAdapter {
             d.reject(reason);
         }, 50);
     }
-*/
 
 }
 }

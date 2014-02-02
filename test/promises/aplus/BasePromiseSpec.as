@@ -29,7 +29,6 @@ public class BasePromiseSpec {
         specUnderTest.alreadyFulfilled(value, test, done);
     }
 
-    /*
      public static function immediatelyFulfilled(value:*, test:Function, done:Function):void {
      specUnderTest.immediatelyFulfilled(value, test, done);
      }
@@ -49,7 +48,6 @@ public class BasePromiseSpec {
      public static function eventuallyRejected(reason:*, test:Function, done:Function):void {
      specUnderTest.eventuallyRejected(reason, test, done);
      }
-     */
 
     protected var dummy:Object = {dummy: "dummy"};// we fulfill or reject with this when we don't intend to test against it
 

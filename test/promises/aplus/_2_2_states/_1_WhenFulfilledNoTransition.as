@@ -1,9 +1,10 @@
 package promises.aplus._2_2_states {
 
+import flash.utils.setTimeout;
+
 import org.flexunit.asserts.*;
 
-import promises.aplus.BasePromiseSpec;
-import promises.aplus.Promise;
+import promises.aplus.*;
 
 /**
  * These are the tests for the the following section of the spec:
@@ -49,6 +50,52 @@ public class _1_WhenFulfilledNoTransition extends BasePromiseSpec{
     public function already_fulfilled():void {
         alreadyFulfilled(dummy, promiseHandler, done);
         afterTick(done,2*tick);
+    }
+
+    [Test(async)]
+    public function immediately_fulfilled():void {
+        immediatelyFulfilled(dummy, promiseHandler, done);
+        afterTick(done,2);
+    }
+
+    [Test(async)]
+    public function eventually_fulfilled():void {
+        eventuallyFulfilled(dummy, promiseHandler, done);
+        afterTick(done,2);
+    }
+
+    [Test(async)]
+    public function trying_to_fulfill_then_immediately_reject():void {
+        var d:Deferred = deferred();
+        promiseHandler(d.promise, done);
+        d.resolve(dummy);
+        d.reject(dummy);
+        afterTick(done,2);
+    }
+
+    [Test(async)]
+    public function trying_to_fulfill_then_reject_delayed():void {
+        var d:Deferred = deferred();
+        promiseHandler(d.promise, done);
+
+        setTimeout(function ():void {
+            d.resolve(dummy);
+            d.reject(dummy);
+        }, 50);
+
+        afterTick(done,3);
+    }
+
+    [Test(async)]
+    public function trying_to_fulfill_immediately_then_reject_delayed():void {
+        var d:Deferred = deferred();
+        promiseHandler(d.promise,done);
+        d.resolve(dummy);
+        setTimeout(function ():void {
+            d.reject(dummy);
+        }, 50);
+
+        afterTick(done,3);
     }
 
 }
