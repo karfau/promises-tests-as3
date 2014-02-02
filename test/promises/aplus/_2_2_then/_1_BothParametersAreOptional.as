@@ -12,16 +12,16 @@ import promises.aplus.*;
  * this is a port of the following js-tests:
  * https://github.com/promises-aplus/promises-tests/blob/master/lib/tests/2.2.1.js
  *
+ * @see https://github.com/karfau/promises-tests-as3/issues/3
  * As the current AS implementation uses typed arguments for then, using 
  * <code>false, 5 or {}</code>
  * throws a TypeError at runtime.
  * So maybe this should be considered violating the specs.
  * But currently those tests are commented out.
- * 
+ * (It could help to use theories here so that each test executes on its own instead of the first failing one hides the other failing ones)
  * 
  */
 public class _1_BothParametersAreOptional extends BasePromiseSpec {
-//TODO: it would be better to us theories here so that each test executes on its own instead of the first failing one hides the other failing ones
 
     [Test(async)]
     public function onFulFilled_is_optional_and_is_ignored_when_not_a_function__applied_to_a_directly_rejected_promise():void {
