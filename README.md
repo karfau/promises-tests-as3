@@ -15,8 +15,8 @@ Current status:
 
 **2.2.1** completed  
 **2.2.2** completed  
-**2.2.3** in progress by @karfau  
-**2.2.4**  
+**2.2.3** completed  
+**2.2.4** in progress by @karfau   
 **2.2.5**  
 **2.2.6**  
 **2.2.7**  
