@@ -572,8 +572,8 @@ jQuery.cookie = function(name, value, options) {
 <body>
 <div id="container">
 <div id="header">
-<div class="time">2.94 s</div>
-<h1>promises.aplus: <strong><span class="total">41 total, </span><span class="passed">41 passed</span></strong>
+<div class="time">4.28 s</div>
+<h1>promises.aplus: <strong><span class="total">52 total, </span><span class="passed">52 passed</span></strong>
 </h1>
 <div id="treecontrol">
 <ul>
@@ -591,23 +591,28 @@ jQuery.cookie = function(name, value, options) {
 <ul id="tree">
 <li xmlns="" class="level top open">
 <span><em class="time">
-<div class="time">970 ms</div>
+<div class="time">1.27 s</div>
 </em>promises.aplus._2_2_then._2_When_onFulfilled_is_a_function</span>
 <ul>
 <li class="level test">
 <span><em class="time">
-<div class="time">77 ms</div>
-</em><em class="status">passed</em>it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__immediately</span>
+<div class="time">66 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_more_then_once__already_fulfilled</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">60 ms</div>
-</em><em class="status">passed</em>must_be_called_after_promise_is_fulfilled__with_promise_s_fulfillment_value_as_first_argument__immediatelyFulfilled</span>
+<div class="time">142 ms</div>
+</em><em class="status">passed</em>must_be_called_after_promise_is_fulfilled__with_promise_s_fulfillment_value_as_first_argument__eventuallyFulfilled</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">120 ms</div>
+<div class="time">134 ms</div>
 </em><em class="status">passed</em>it_must_not_be_called_before_promise_is_fulfilled__fulfilled_after_a_delay</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">49 ms</div>
+</em><em class="status">passed</em>must_be_called_after_promise_is_fulfilled__with_promise_s_fulfillment_value_as_first_argument__immediatelyFulfilled</span>
 </li>
 <li class="level test">
 <span><em class="time">
@@ -617,169 +622,206 @@ jQuery.cookie = function(name, value, options) {
 <li class="level test">
 <span><em class="time">
 <div class="time">49 ms</div>
-</em><em class="status">passed</em>it_must_not_be_called_more_then_once__already_fulfilled</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">65 ms</div>
 </em><em class="status">passed</em>must_be_called_after_promise_is_fulfilled__with_promise_s_fulfillment_value_as_first_argument__alreadyFulfilled</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">114 ms</div>
-</em><em class="status">passed</em>must_be_called_after_promise_is_fulfilled__with_promise_s_fulfillment_value_as_first_argument__eventuallyFulfilled</span>
+<div class="time">66 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__immediately</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">51 ms</div>
-</em><em class="status">passed</em>it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__immediately_then_delayed</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">116 ms</div>
+<div class="time">115 ms</div>
 </em><em class="status">passed</em>it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__delayed</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">202 ms</div>
-</em><em class="status">passed</em>it_must_not_be_called_more_then_once__when_multiple_then_calls_are_made__spaced_apart_in_time</span>
+<div class="time">50 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__immediately_then_delayed</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">33 ms</div>
+<div class="time">182 ms</div>
 </em><em class="status">passed</em>it_must_not_be_called_more_then_once__when_then_is_interleaved_with_fulfillment</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">332 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_more_then_once__when_multiple_then_calls_are_made__spaced_apart_in_time</span>
 </li>
 </ul>
 </li>
 <li class="level top open">
 <span><em class="time">
-<div class="time">142 ms</div>
+<div class="time">148 ms</div>
 </em>promises.aplus._2_2_then._1_BothParametersAreOptional</span>
 <ul>
 <li class="level test">
 <span><em class="time">
-<div class="time">6 ms</div>
-</em><em class="status">passed</em>onRejected_is_optional_and_is_ignored_when_not_a_function__applied_to_a_promise_fulfilled_and_then_chained_off_of</span>
+<div class="time">63 ms</div>
+</em><em class="status">passed</em>onFulFilled_is_optional_and_is_ignored_when_not_a_function__applied_to_a_promise_rejected_and_then_chained_off_of</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">37 ms</div>
-</em><em class="status">passed</em>onFulFilled_is_optional_and_is_ignored_when_not_a_function__applied_to_a_directly_rejected_promise</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">37 ms</div>
+<div class="time">50 ms</div>
 </em><em class="status">passed</em>onRejected_is_optional_and_is_ignored_when_not_a_function__applied_to_a_directly_fulfilled_promise</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">62 ms</div>
-</em><em class="status">passed</em>onFulFilled_is_optional_and_is_ignored_when_not_a_function__applied_to_a_promise_rejected_and_then_chained_off_of</span>
+<div class="time">30 ms</div>
+</em><em class="status">passed</em>onRejected_is_optional_and_is_ignored_when_not_a_function__applied_to_a_promise_fulfilled_and_then_chained_off_of</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">5 ms</div>
+</em><em class="status">passed</em>onFulFilled_is_optional_and_is_ignored_when_not_a_function__applied_to_a_directly_rejected_promise</span>
 </li>
 </ul>
 </li>
 <li class="level top open">
 <span><em class="time">
-<div class="time">739 ms</div>
-</em>promises.aplus.TestBasePromiseSpecAsync</span>
+<div class="time">1.13 s</div>
+</em>promises.aplus._2_2_then._3_When_onRejected_is_a_function</span>
 <ul>
 <li class="level test">
 <span><em class="time">
-<div class="time">22 ms</div>
-</em><em class="status">passed</em>afterTick_with_lots_of_ticks_fails_with_timeout</span>
+<div class="time">126 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_more_then_once__trying_to_reject_a_pending_promise_more_than_once__delayed</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">6 ms</div>
-</em><em class="status">passed</em>afterTick_without_async_fails</span>
+<div class="time">148 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_before_promise_is_rejected__rejected_after_a_delay</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">21 ms</div>
-</em><em class="status">passed</em>expectAsync_then_afterTicks_only_creates_one_asyncHandle</span>
+<div class="time">134 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_before_promise_is_rejected__never_rejected</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">50 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_more_then_once__already_rejected</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">49 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_more_then_once__trying_to_reject_a_pending_promise_more_than_once__immediately</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">115 ms</div>
+</em><em class="status">passed</em>must_be_called_after_promise_is_rejected__with_promise_s_rejection_reason_as_first_argument__eventuallyRejected</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">216 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_more_then_once__when_then_is_interleaved_with_rejection</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">66 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_more_then_once__trying_to_reject_a_pending_promise_more_than_once__immediately_then_delayed</span>
 </li>
 <li class="level test">
 <span><em class="time">
 <div class="time">32 ms</div>
-</em><em class="status">passed</em>afterTick_is_not_calling_directly_but_later</span>
+</em><em class="status">passed</em>must_be_called_after_promise_is_rejected__with_promise_s_rejection_reason_as_first_argument__alreadyRejected</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">37 ms</div>
-</em><em class="status">passed</em>expectAsync_then_afterTicks_then_done_fails_in_teardown</span>
+<div class="time">151 ms</div>
+</em><em class="status">passed</em>it_must_not_be_called_more_then_once__when_multiple_then_calls_are_made__spaced_apart_in_time</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">27 ms</div>
-</em><em class="status">passed</em>expectAsync_then_afterTicks_uses_done_everything_should_be_complete</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">36 ms</div>
-</em><em class="status">passed</em>afterTick_is_called_after_setTimeout_with_same_amount_of_ticks</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">197 ms</div>
-</em><em class="status">passed</em>expectAsync_call_done_later</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">15 ms</div>
-</em><em class="status">passed</em>expectAsync_without_async_fails</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">4 ms</div>
-</em><em class="status">passed</em>getDoneHandle_twice_returns_same_instance</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">3 ms</div>
-</em><em class="status">passed</em>callDoneHandle_twice_should_work</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">2 ms</div>
-</em><em class="status">passed</em>getDoneHandle_without_async_fails</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">306 ms</div>
-</em><em class="status">passed</em>expectAsync_done_is_not_called_fails_with_timeout</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">31 ms</div>
-</em><em class="status">passed</em>expectAsync_call_done_directly</span>
+<div class="time">47 ms</div>
+</em><em class="status">passed</em>must_be_called_after_promise_is_rejected__with_promise_s_rejection_reason_as_first_argument__immediatelyRejected</span>
 </li>
 </ul>
 </li>
 <li class="level top open">
 <span><em class="time">
-<div class="time">544 ms</div>
-</em>promises.aplus._2_1_states._2_WhenRejectedNoTransition</span>
+<div class="time">723 ms</div>
+</em>promises.aplus.TestBasePromiseSpecAsync</span>
 <ul>
 <li class="level test">
 <span><em class="time">
-<div class="time">65 ms</div>
-</em><em class="status">passed</em>immediately_fejected</span>
+<div class="time">50 ms</div>
+</em><em class="status">passed</em>afterTick_is_called_after_setTimeout_with_same_amount_of_ticks</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">81 ms</div>
-</em><em class="status">passed</em>eventually_fejected</span>
+<div class="time">32 ms</div>
+</em><em class="status">passed</em>expectAsync_then_afterTicks_only_creates_one_asyncHandle</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">100 ms</div>
-</em><em class="status">passed</em>trying_to_reject_then_immediately_fulfill</span>
+<div class="time">17 ms</div>
+</em><em class="status">passed</em>afterTick_is_not_calling_directly_but_later</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">101 ms</div>
-</em><em class="status">passed</em>trying_to_reject_then_fulfill_delayed</span>
+<div class="time">20 ms</div>
+</em><em class="status">passed</em>expectAsync_then_afterTicks_then_done_fails_in_teardown</span>
 </li>
+<li class="level test">
+<span><em class="time">
+<div class="time">29 ms</div>
+</em><em class="status">passed</em>expectAsync_then_afterTicks_uses_done_everything_should_be_complete</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">32 ms</div>
+</em><em class="status">passed</em>afterTick_with_lots_of_ticks_fails_with_timeout</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">4 ms</div>
+</em><em class="status">passed</em>expectAsync_without_async_fails</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">12 ms</div>
+</em><em class="status">passed</em>afterTick_without_async_fails</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">1 ms</div>
+</em><em class="status">passed</em>getDoneHandle_without_async_fails</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">3 ms</div>
+</em><em class="status">passed</em>getDoneHandle_twice_returns_same_instance</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">2 ms</div>
+</em><em class="status">passed</em>callDoneHandle_twice_should_work</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">326 ms</div>
+</em><em class="status">passed</em>expectAsync_done_is_not_called_fails_with_timeout</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">32 ms</div>
+</em><em class="status">passed</em>expectAsync_call_done_directly</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">163 ms</div>
+</em><em class="status">passed</em>expectAsync_call_done_later</span>
+</li>
+</ul>
+</li>
+<li class="level top open">
+<span><em class="time">
+<div class="time">509 ms</div>
+</em>promises.aplus._2_1_states._2_WhenRejectedNoTransition</span>
+<ul>
 <li class="level test">
 <span><em class="time">
 <div class="time">97 ms</div>
@@ -787,25 +829,45 @@ jQuery.cookie = function(name, value, options) {
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">100 ms</div>
+<div class="time">68 ms</div>
 </em><em class="status">passed</em>already_rejected</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">97 ms</div>
+</em><em class="status">passed</em>immediately_fejected</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">68 ms</div>
+</em><em class="status">passed</em>eventually_fejected</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">63 ms</div>
+</em><em class="status">passed</em>trying_to_reject_then_immediately_fulfill</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">116 ms</div>
+</em><em class="status">passed</em>trying_to_reject_then_fulfill_delayed</span>
 </li>
 </ul>
 </li>
 <li class="level top open">
 <span><em class="time">
-<div class="time">541 ms</div>
+<div class="time">494 ms</div>
 </em>promises.aplus._2_1_states._1_WhenFulfilledNoTransition</span>
 <ul>
 <li class="level test">
 <span><em class="time">
-<div class="time">63 ms</div>
+<div class="time">68 ms</div>
 </em><em class="status">passed</em>immediately_fulfilled</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">81 ms</div>
-</em><em class="status">passed</em>trying_to_fulfill_immediately_then_reject_delayed</span>
+<div class="time">63 ms</div>
+</em><em class="status">passed</em>already_fulfilled</span>
 </li>
 <li class="level test">
 <span><em class="time">
@@ -815,17 +877,17 @@ jQuery.cookie = function(name, value, options) {
 <li class="level test">
 <span><em class="time">
 <div class="time">82 ms</div>
-</em><em class="status">passed</em>trying_to_fulfill_then_immediately_reject</span>
+</em><em class="status">passed</em>trying_to_fulfill_immediately_then_reject_delayed</span>
 </li>
 <li class="level test">
 <span><em class="time">
-<div class="time">100 ms</div>
-</em><em class="status">passed</em>already_fulfilled</span>
-</li>
-<li class="level test">
-<span><em class="time">
-<div class="time">99 ms</div>
+<div class="time">68 ms</div>
 </em><em class="status">passed</em>eventually_fulfilled</span>
+</li>
+<li class="level test">
+<span><em class="time">
+<div class="time">97 ms</div>
+</em><em class="status">passed</em>trying_to_fulfill_then_immediately_reject</span>
 </li>
 </ul>
 </li>
@@ -833,7 +895,7 @@ jQuery.cookie = function(name, value, options) {
 </div>
 </div>
 <div id="footer">
-<p>Generated by IntelliJ IDEA on 02.02.14 23:06</p>
+<p>Generated by IntelliJ IDEA on 04.02.14 23:11</p>
 </div>
 </body>
 </html>
