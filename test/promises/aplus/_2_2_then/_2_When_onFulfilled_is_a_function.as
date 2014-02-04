@@ -1,16 +1,12 @@
 package promises.aplus._2_2_then {
-import org.hamcrest.Matcher;
-import org.hamcrest.collection.array;
-
-import promises.aplus.*;
-
 import flash.utils.setTimeout;
 
 import org.flexunit.assertThat;
-
 import org.flexunit.asserts.assertFalse;
 import org.flexunit.asserts.assertTrue;
 import org.hamcrest.object.strictlyEqualTo;
+
+import promises.aplus.*;
 
 /**
  * These are the tests for the the following section of the spec:
@@ -31,13 +27,10 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
     
     /**
      * there are two cases in which this can end the (async) execution of the test:
-     * a) when the reject handler gets called after the resolved handler the test fails
-     * b) when the reject handler gets called first it executes the done parameter
+     * a) when the resolve handler gets called with a value different from sentinel the test fails
+     * b) when the resolve handler gets called with value being sentinel it executes the done parameter
      *
-     * all testcases use afterTick() for a second delay in which execution of the rejected handler after the resolved handler could happen,
-     * before completing the execution of the test.
-     *
-     * @see com.codecatalyst.promise.spec.BasePromiseSpec.afterTick()
+     * all test use the timeout to fail after a certain delay when the handler is not called.
      */
     protected function promiseHandler(promise:Promise, done:Function):void {
         promise.then(function onFulfilled(value:*):void {
@@ -166,35 +159,26 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
         var d:Deferred = deferred();
         var timesCalled:Array = [0,0,0];
 
-        var matcher:Matcher = array(1,1,1);
-        function complete():void {
-            if(matcher.matches(timesCalled)){
-                done();
-            }
-        } 
-        
         d.promise.then(function onFulfilled():void {
             timesCalled[0]++;
             assertThat(timesCalled[0], 1);
-            complete();
         });
         setTimeout(function ():void {
             d.promise.then(function onFulfilled():void {
                 timesCalled[1]++;
                 assertThat(timesCalled[1], 1);
-                complete();
             });
         }, 50);
         setTimeout(function ():void {
             d.promise.then(function onFulfilled():void {
                 timesCalled[2]++;
                 assertThat(timesCalled[2], 1);
-                complete();
             });
         }, 100);
 
         setTimeout(function ():void {
             d.resolve(dummy);
+            setTimeout(done,100);
         }, 150);
     }
     [Test(async)]
@@ -203,17 +187,9 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
         var d:Deferred = deferred();
         var timesCalled:Array = [0,0];
 
-        var matcher:Matcher = array(1,1);
-        function complete():void {
-            if(matcher.matches(timesCalled)){
-                done();
-            }
-        } 
-        
         d.promise.then(function onFulfilled():void {
             timesCalled[0]++;
             assertThat(timesCalled[0], 1);
-            complete();
         });
         
         d.resolve(dummy);
@@ -221,9 +197,8 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
         d.promise.then(function onFulfilled():void {
             timesCalled[1]++;
             assertThat(timesCalled[1], 1);
-            complete();
         });
-
+        setTimeout(done,150);
     }
 
 
