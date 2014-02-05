@@ -178,7 +178,7 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
 
         setTimeout(function ():void {
             d.resolve(dummy);
-            setTimeout(done,100);
+            setTimeout(done,50);
         }, 150);
     }
     [Test(async)]
