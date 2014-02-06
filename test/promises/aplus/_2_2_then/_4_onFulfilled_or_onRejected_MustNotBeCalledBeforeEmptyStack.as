@@ -1,10 +1,8 @@
 package promises.aplus._2_2_then {
 import flash.utils.setTimeout;
 
-import org.flexunit.assertThat;
 import org.flexunit.asserts.assertFalse;
 import org.flexunit.asserts.assertTrue;
-import org.hamcrest.object.strictlyEqualTo;
 
 import promises.aplus.*;
 
@@ -89,6 +87,80 @@ public class _4_onFulfilled_or_onRejected_MustNotBeCalledBeforeEmptyStack extend
         eventuallyRejected(sentinel, assertRejectedAfterReturned, done);
     }
 
+    [Test]
+    public function Clean_stack_execution_ordering__fulfillment_case__when_onFulfilled_is_added_immediately_before_the_promise_is_fulfilled():void{
+        var d:Deferred = deferred();
+        var onFulfilledCalled:Boolean = false;
 
+        d.promise.then(function onFulfilled():void {
+            onFulfilledCalled = true;
+        });
+
+        d.resolve(dummy);
+
+        assertFalse(onFulfilledCalled);
+    }
+
+    [Test]
+    public function Clean_stack_execution_ordering__fulfillment_case__when_onFulfilled_is_added_immediately_after_the_promise_is_fulfilled():void{
+        var d:Deferred = deferred();
+        var onFulfilledCalled:Boolean = false;
+
+        d.resolve(dummy);
+
+        d.promise.then(function onFulfilled():void {
+            onFulfilledCalled = true;
+        });
+
+        assertFalse(onFulfilledCalled);
+    }
+
+    [Test(async)]
+    public function Clean_stack_execution_ordering__fulfillment_case__when_onFulfilled_is_added_inside_another_onFulfilled():void{
+        expectAsync();
+        var promise:Promise = resolved(dummy);
+        var firstOnFulfilledFinished:Boolean = false;
+
+        promise.then(function ():void {
+            promise.then(function ():void {
+                assertTrue(firstOnFulfilledFinished);
+                done();
+            });
+            firstOnFulfilledFinished = true;
+        });
+    }
+
+    [Test(async)]
+    public function Clean_stack_execution_ordering__fulfillment_case__when_onFulfilled_is_added_inside_an_onRejected():void{
+        expectAsync();
+        var promise:Promise = rejected(dummy);
+        var promise2:Promise = resolved(dummy);
+        var firstOnRejectedFinished:Boolean = false;
+
+        promise.then(null, function ():void {
+            promise2.then(function ():void {
+                assertTrue(firstOnRejectedFinished);
+                done();
+            });
+            firstOnRejectedFinished = true;
+        });
+    }
+
+    [Test(async)]
+    public function Clean_stack_execution_ordering__fulfillment_case__when_the_promise_is_fulfilled_asynchronously():void{
+        expectAsync();
+        var d:Deferred = deferred();
+        var firstStackFinished:Boolean = false;
+
+        setTimeout(function ():void {
+            d.resolve(dummy);
+            firstStackFinished = true;
+        }, 0);
+
+        d.promise.then(function ():void {
+            assertTrue(firstStackFinished);
+            done();
+        });
+    }
 }
 }
