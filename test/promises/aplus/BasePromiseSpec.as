@@ -11,41 +11,41 @@ import org.hamcrest.core.*;
 import org.hamcrest.object.*;
 
 public class BasePromiseSpec {
-    private static var specUnderTest:SpecAdapter;
+    private var specUnderTest:SpecAdapter;
 
-    protected static function deferred():Deferred {
+    protected function deferred():Deferred {
         return specUnderTest.deferred();
     }
 
-    protected static function resolved(value:*):Promise {
+    protected function resolved(value:*):Promise {
         return specUnderTest.resolved(value);
     }
 
-    protected static function rejected(reason:*):Promise {
+    protected function rejected(reason:*):Promise {
         return specUnderTest.rejected(reason);
     }
 
-    public static function alreadyFulfilled(value:*, test:Function, done:Function):void {
+    public function alreadyFulfilled(value:*, test:Function, done:Function):void {
         specUnderTest.alreadyFulfilled(value, test, done);
     }
 
-    public static function immediatelyFulfilled(value:*, test:Function, done:Function):void {
+    public function immediatelyFulfilled(value:*, test:Function, done:Function):void {
         specUnderTest.immediatelyFulfilled(value, test, done);
     }
 
-    public static function eventuallyFulfilled(value:*, test:Function, done:Function):void {
+    public function eventuallyFulfilled(value:*, test:Function, done:Function):void {
         specUnderTest.eventuallyFulfilled(value, test, done);
     }
 
-    public static function alreadyRejected(reason:*, test:Function, done:Function):void {
+    public function alreadyRejected(reason:*, test:Function, done:Function):void {
         specUnderTest.alreadyRejected(reason, test, done);
     }
 
-    public static function immediatelyRejected(reason:*, test:Function, done:Function):void {
+    public function immediatelyRejected(reason:*, test:Function, done:Function):void {
         specUnderTest.immediatelyRejected(reason, test, done);
     }
 
-    public static function eventuallyRejected(reason:*, test:Function, done:Function):void {
+    public function eventuallyRejected(reason:*, test:Function, done:Function):void {
         specUnderTest.eventuallyRejected(reason, test, done);
     }
 
@@ -87,7 +87,8 @@ public class BasePromiseSpec {
         return 300;
     }
 
-    public static function get tick():Number {
+    //noinspection JSMethodCanBeStatic
+    public function get tick():Number {
         return 5;
     }
 

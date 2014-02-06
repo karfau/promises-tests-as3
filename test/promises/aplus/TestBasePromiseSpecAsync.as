@@ -91,7 +91,7 @@ public class TestBasePromiseSpecAsync {
 //        so checking AT one tick it should not have been called yet.
         setTimeout(function assertionNotJet():void {
             assertThat(callableExecutions, 0);
-        }, ticks * BasePromiseSpec.tick);//this is called
+        }, ticks * test.tick);//this is called
 
         expectedCallableExecutions = 1;//checked in teardown
     }
@@ -102,7 +102,7 @@ public class TestBasePromiseSpecAsync {
     public function afterTick_with_lots_of_ticks_fails_with_timeout():void {
         var toMuchTicks:uint = 10;
 
-        assertThat("timeout should be smaller then ticks", BasePromiseSpec.tick * toMuchTicks, lessThan(/*timeout in metadata*/100));
+        assertThat("timeout should be smaller then ticks", test.tick * toMuchTicks, lessThan(/*timeout in metadata*/100));
         
         /* from local experience: 
          * while BasePromiseSpec.tick is 5 (milliseconds) 
