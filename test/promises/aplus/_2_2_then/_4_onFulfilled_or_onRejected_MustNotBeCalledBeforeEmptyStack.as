@@ -39,17 +39,23 @@ public class _4_onFulfilled_or_onRejected_MustNotBeCalledBeforeEmptyStack extend
     }
 
     [Test(async)]
-    public function then_returns_before_the_promise_becomes_fulfilled_or_rejected__alreadyFulfilled():void {
+    public function then_returns_before_the_promise_becomes_fulfilled_or_rejected__alreadyFulfilled():void {        
+        var done:Function = expectAsync();
+
         alreadyFulfilled(sentinel, assertFulfilledAfterReturned, done);
     }
 
     [Test(async)]
     public function then_returns_before_the_promise_becomes_fulfilled_or_rejected__immediatelyFulfilled():void {
+        var done:Function = expectAsync();
+
         immediatelyFulfilled(sentinel, assertFulfilledAfterReturned, done);
     }
 
     [Test(async)]
     public function then_returns_before_the_promise_becomes_fulfilled_or_rejected__eventuallyFulfilled():void {
+        var done:Function = expectAsync();
+
         eventuallyFulfilled(sentinel, assertFulfilledAfterReturned, done);
     }
 
@@ -74,16 +80,22 @@ public class _4_onFulfilled_or_onRejected_MustNotBeCalledBeforeEmptyStack extend
 
     [Test(async)]
     public function must_be_called_after_promise_is_rejected__with_promise_s_rejection_reason_as_first_argument__alreadyRejected():void {
+        var done:Function = expectAsync();
+
         alreadyRejected(sentinel, assertRejectedAfterReturned, done);
     }
 
     [Test(async)]
     public function must_be_called_after_promise_is_rejected__with_promise_s_rejection_reason_as_first_argument__immediatelyRejected():void {
+        var done:Function = expectAsync();
+
         immediatelyRejected(sentinel, assertRejectedAfterReturned, done);
     }
 
     [Test(async)]
     public function must_be_called_after_promise_is_rejected__with_promise_s_rejection_reason_as_first_argument__eventuallyRejected():void {
+        var done:Function = expectAsync();
+
         eventuallyRejected(sentinel, assertRejectedAfterReturned, done);
     }
 
@@ -117,8 +129,9 @@ public class _4_onFulfilled_or_onRejected_MustNotBeCalledBeforeEmptyStack extend
 
     [Test(async)]
     public function Clean_stack_execution_ordering__fulfillment_case__when_onFulfilled_is_added_inside_another_onFulfilled():void{
-        expectAsync();
-        var promise:Promise = resolved(dummy);
+        var done:Function = expectAsync();
+
+        var promise:Promise = resolved();
         var firstOnFulfilledFinished:Boolean = false;
 
         promise.then(function ():void {
@@ -132,7 +145,8 @@ public class _4_onFulfilled_or_onRejected_MustNotBeCalledBeforeEmptyStack extend
 
     [Test(async)]
     public function Clean_stack_execution_ordering__fulfillment_case__when_onFulfilled_is_added_inside_an_onRejected():void{
-        expectAsync();
+        var done:Function = expectAsync();
+
         var promise:Promise = rejected(dummy);
         var promise2:Promise = resolved(dummy);
         var firstOnRejectedFinished:Boolean = false;
@@ -148,7 +162,8 @@ public class _4_onFulfilled_or_onRejected_MustNotBeCalledBeforeEmptyStack extend
 
     [Test(async)]
     public function Clean_stack_execution_ordering__fulfillment_case__when_the_promise_is_fulfilled_asynchronously():void{
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var firstStackFinished:Boolean = false;
 
@@ -160,6 +175,9 @@ public class _4_onFulfilled_or_onRejected_MustNotBeCalledBeforeEmptyStack extend
         d.promise.then(function ():void {
             assertTrue(firstStackFinished);
             done();
+            setTimeout(function ():void{
+                done();
+            },0);
         });
     }
 }

@@ -41,23 +41,30 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function must_be_called_after_promise_is_fulfilled__with_promise_s_fulfillment_value_as_first_argument__alreadyFulfilled():void {
+        var done:Function = expectAsync();
+
         alreadyFulfilled(sentinel, promiseHandler, done);
     }
 
     [Test(async)]
     public function must_be_called_after_promise_is_fulfilled__with_promise_s_fulfillment_value_as_first_argument__immediatelyFulfilled():void {
+        var done:Function = expectAsync();
+
         immediatelyFulfilled(sentinel, promiseHandler, done);
     }
 
     [Test(async)]
     public function must_be_called_after_promise_is_fulfilled__with_promise_s_fulfillment_value_as_first_argument__eventuallyFulfilled():void {
+        var done:Function = expectAsync();
+
         eventuallyFulfilled(sentinel, promiseHandler, done);
     }
 
 
     [Test(async)]
     public function it_must_not_be_called_before_promise_is_fulfilled__fulfilled_after_a_delay():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var isFulfilled:Boolean = false;
 
@@ -74,7 +81,8 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_before_promise_is_fulfilled__never_fulfilled():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var onFulfilledCalled:Boolean = false;
 
@@ -91,7 +99,8 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_more_then_once__already_fulfilled():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var timesCalled:int = 0;
 
         resolved(dummy).then(function onFulfilled():void {
@@ -103,7 +112,8 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__immediately():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var timesCalled:int = 0;
         
@@ -119,7 +129,8 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__delayed():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var timesCalled:int = 0;
         
@@ -137,7 +148,8 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_more_then_once__trying_to_fulfill_a_pending_promise_more_than_once__immediately_then_delayed():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var timesCalled:int = 0;
         
@@ -155,7 +167,8 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_more_then_once__when_multiple_then_calls_are_made__spaced_apart_in_time():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var timesCalled:Array = [0,0,0];
 
@@ -183,7 +196,8 @@ public class _2_When_onFulfilled_is_a_function extends BasePromiseSpec {
     }
     [Test(async)]
     public function it_must_not_be_called_more_then_once__when_then_is_interleaved_with_fulfillment():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var timesCalled:Array = [0,0];
 

@@ -25,7 +25,8 @@ public class _1_BothParametersAreOptional extends BasePromiseSpec {
 
     [Test(async)]
     public function onFulFilled_is_optional_and_is_ignored_when_not_a_function__applied_to_a_directly_rejected_promise():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         function testNonFunction(nonFunction:*, stringRepresentation:String):void {
             rejected(dummy).then(nonFunction, function onRejected():void {
                 done();
@@ -42,7 +43,8 @@ public class _1_BothParametersAreOptional extends BasePromiseSpec {
 
     [Test(async)]
     public function onFulFilled_is_optional_and_is_ignored_when_not_a_function__applied_to_a_promise_rejected_and_then_chained_off_of():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         function testNonFunction(nonFunction:*, stringRepresentation:String):void {
             rejected(dummy)
                     .then(function ():void {}, undefined)
@@ -60,7 +62,8 @@ public class _1_BothParametersAreOptional extends BasePromiseSpec {
 
     [Test(async)]
     public function onRejected_is_optional_and_is_ignored_when_not_a_function__applied_to_a_directly_fulfilled_promise():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         function testNonFunction(nonFunction:*, stringRepresentation:String):void {
             resolved(dummy).then(function onResolved():void {
                 done();
@@ -77,7 +80,8 @@ public class _1_BothParametersAreOptional extends BasePromiseSpec {
 
     [Test(async)]
     public function onRejected_is_optional_and_is_ignored_when_not_a_function__applied_to_a_promise_fulfilled_and_then_chained_off_of():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         function testNonFunction(nonFunction:*, stringRepresentation:String):void {
             resolved(dummy)
                     .then(undefined, function ():void {})

@@ -41,23 +41,30 @@ public class _3_When_onRejected_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function must_be_called_after_promise_is_rejected__with_promise_s_rejection_reason_as_first_argument__alreadyRejected():void {
+        var done:Function = expectAsync();
+
         alreadyRejected(sentinel, promiseHandler, done);
     }
 
     [Test(async)]
     public function must_be_called_after_promise_is_rejected__with_promise_s_rejection_reason_as_first_argument__immediatelyRejected():void {
+        var done:Function = expectAsync();
+
         immediatelyRejected(sentinel, promiseHandler, done);
     }
 
     [Test(async)]
     public function must_be_called_after_promise_is_rejected__with_promise_s_rejection_reason_as_first_argument__eventuallyRejected():void {
+        var done:Function = expectAsync();
+
         eventuallyRejected(sentinel, promiseHandler, done);
     }
 
 
     [Test(async)]
     public function it_must_not_be_called_before_promise_is_rejected__rejected_after_a_delay():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var isRejected:Boolean = false;
 
@@ -74,7 +81,8 @@ public class _3_When_onRejected_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_before_promise_is_rejected__never_rejected():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var onRejectedCalled:Boolean = false;
 
@@ -91,7 +99,8 @@ public class _3_When_onRejected_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_more_then_once__already_rejected():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var timesCalled:int = 0;
 
         rejected(dummy).then(null, function onRejected():void {
@@ -103,7 +112,8 @@ public class _3_When_onRejected_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_more_then_once__trying_to_reject_a_pending_promise_more_than_once__immediately():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var timesCalled:int = 0;
         
@@ -119,7 +129,8 @@ public class _3_When_onRejected_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_more_then_once__trying_to_reject_a_pending_promise_more_than_once__delayed():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var timesCalled:int = 0;
         
@@ -137,7 +148,8 @@ public class _3_When_onRejected_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_more_then_once__trying_to_reject_a_pending_promise_more_than_once__immediately_then_delayed():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var timesCalled:int = 0;
         
@@ -155,7 +167,8 @@ public class _3_When_onRejected_is_a_function extends BasePromiseSpec {
 
     [Test(async)]
     public function it_must_not_be_called_more_then_once__when_multiple_then_calls_are_made__spaced_apart_in_time():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var timesCalled:Array = [0,0,0];
 
@@ -185,7 +198,8 @@ public class _3_When_onRejected_is_a_function extends BasePromiseSpec {
     }
     [Test(async)]
     public function it_must_not_be_called_more_then_once__when_then_is_interleaved_with_rejection():void {
-        expectAsync();
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         var timesCalled:Array = [0,0];
 

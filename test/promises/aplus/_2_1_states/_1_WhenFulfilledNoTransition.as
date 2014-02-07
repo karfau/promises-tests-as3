@@ -48,24 +48,31 @@ public class _1_WhenFulfilledNoTransition extends BasePromiseSpec{
 
     [Test(async)]
     public function already_fulfilled():void {
+        var done:Function = expectAsync();
+        
         alreadyFulfilled(dummy, promiseHandler, done);
         afterTick(done,2);
     }
 
     [Test(async)]
     public function immediately_fulfilled():void {
+        var done:Function = expectAsync();
+
         immediatelyFulfilled(dummy, promiseHandler, done);
         afterTick(done,2);
     }
 
     [Test(async)]
     public function eventually_fulfilled():void {
+        var done:Function = expectAsync();
         eventuallyFulfilled(dummy, promiseHandler, done);
         afterTick(done,2);
     }
 
     [Test(async)]
     public function trying_to_fulfill_then_immediately_reject():void {
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         promiseHandler(d.promise, done);
         d.resolve(dummy);
@@ -75,6 +82,8 @@ public class _1_WhenFulfilledNoTransition extends BasePromiseSpec{
 
     [Test(async)]
     public function trying_to_fulfill_then_reject_delayed():void {
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         promiseHandler(d.promise, done);
 
@@ -88,6 +97,8 @@ public class _1_WhenFulfilledNoTransition extends BasePromiseSpec{
 
     [Test(async)]
     public function trying_to_fulfill_immediately_then_reject_delayed():void {
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         promiseHandler(d.promise,done);
         d.resolve(dummy);

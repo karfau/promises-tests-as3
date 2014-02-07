@@ -7,6 +7,7 @@ import org.flexunit.*;
 import org.flexunit.asserts.*;
 import org.flexunit.async.Async;
 import org.flexunit.async.util.AsyncTestPartial;
+import org.flexunit.async.util.EnsureAsyncRule;
 import org.hamcrest.core.*;
 import org.hamcrest.object.*;
 
@@ -17,11 +18,11 @@ public class BasePromiseSpec {
         return specUnderTest.deferred();
     }
 
-    protected function resolved(value:*):Promise {
+    protected function resolved(value:*=undefined):Promise {
         return specUnderTest.resolved(value);
     }
 
-    protected function rejected(reason:*):Promise {
+    protected function rejected(reason:*=undefined):Promise {
         return specUnderTest.rejected(reason);
     }
 
@@ -48,21 +49,17 @@ public class BasePromiseSpec {
     public function eventuallyRejected(reason:*, test:Function, done:Function):void {
         specUnderTest.eventuallyRejected(reason, test, done);
     }
+    
+    [Rule]
+    public var async:EnsureAsyncRule = new EnsureAsyncRule();
 
     protected var dummy:Object = {dummy: "dummy"};// we fulfill or reject with this when we don't intend to test against it
-
-    private var _done:Function;
-    protected function get done():Function {
-        if (_done == null) {
-            _done = createAsyncHandler();
+    
+    public function expectAsync():Function {
+        if(async.scope.asyncCompleteHandle == null) {
+            async.scope.asyncCompleteHandle = createAsyncHandler();
         }
-
-        return _done;
-    }
-
-    public function expectAsync():void {
-        //noinspection JSUnusedLocalSymbols
-        var initializedNow:Function = done;
+        return async.scope.done;
     }
 
 
@@ -111,7 +108,7 @@ public class BasePromiseSpec {
         }
 
         asyncHandlers = null;
-        _done = null;
+//        _done = null;
 
         //throws AssertionError so do cleanup before
         if (incompleteAsyncHandlers.length > 0) {
@@ -137,13 +134,13 @@ public class BasePromiseSpec {
 
     protected function afterTick(execute:Function, ticks:int = 1):void {
 
-        if (_done == null) {
+        if (async.scope == null) {
             throw new IllegalOperationError("afterTick was called but no asyncHandler was created. Read the docs about how to use expectAsync() and afterTick().")
         }
 
         //noinspection UnnecessaryLocalVariableJS
-        var async:AsyncTestPartial = new AsyncTestPartial(execute);
-        asyncHandlers[asyncHandlers.length] = async;
+        var partial:AsyncTestPartial = new AsyncTestPartial(execute);
+        asyncHandlers[asyncHandlers.length] = partial;
 
         var timeoutId:uint;
         var ticked:int = 0;
@@ -152,7 +149,7 @@ public class BasePromiseSpec {
             clearTimeout(timeoutId);
             ticked++;
             if (ticked > ticks) {
-                async.done();
+                partial.done();
             } else {
                 timeoutId = setTimeout(loop, tick);
             }

@@ -48,24 +48,32 @@ public class _2_WhenRejectedNoTransition extends BasePromiseSpec {
 
     [Test(async)]
     public function already_rejected():void {
+        var done:Function = expectAsync();
+
         alreadyRejected(dummy, promiseHandler, done);
         afterTick(done,2);
     }
 
     [Test(async)]
     public function immediately_fejected():void {
+        var done:Function = expectAsync();
+
         immediatelyRejected(dummy, promiseHandler, done);
         afterTick(done,2);
     }
 
     [Test(async)]
     public function eventually_fejected():void {
+        var done:Function = expectAsync();
+
         eventuallyRejected(dummy, promiseHandler, done);
         afterTick(done,2);
     }
 
     [Test(async)]
     public function trying_to_reject_then_immediately_fulfill():void {
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         promiseHandler(d.promise, done);
         d.reject(dummy);
@@ -75,6 +83,8 @@ public class _2_WhenRejectedNoTransition extends BasePromiseSpec {
 
     [Test(async)]
     public function trying_to_reject_then_fulfill_delayed():void {
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         promiseHandler(d.promise, done);
         
@@ -88,6 +98,8 @@ public class _2_WhenRejectedNoTransition extends BasePromiseSpec {
 
     [Test(async)]
     public function trying_to_reject_immediately_then_fulfill_delayed():void {
+        var done:Function = expectAsync();
+
         var d:Deferred = deferred();
         promiseHandler(d.promise,done);
         d.reject(dummy);

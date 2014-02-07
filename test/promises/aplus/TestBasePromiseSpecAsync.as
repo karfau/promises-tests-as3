@@ -208,8 +208,22 @@ public class TestBasePromiseSpecAsync {
         test.expectAsync();
         test.callAfterTicks(0,test.getDoneHandle());
     }
+/*
+
+    [Test(async)]
+    public function async_MetadataTag_but_returns_without_expectAsync():void {
+        //this is done by the flexunit framework to the EnsureAsyncRule that creates the scope just before the method is called 
+        test.async.apply(null,new AsyncFrameworkMethod(),this);
+        
+        //this is done by the flexunit framework to the EnsureAsyncRule after the method completed
+    }
+*/
 }
 }
+
+import flex.lang.reflect.Method;
+
+import org.flexunit.runners.model.FrameworkMethod;
 
 import promises.aplus.BasePromiseSpec;
 
@@ -219,16 +233,34 @@ class TestImpl extends BasePromiseSpec {
         executedTestInstance = value;
     }
 
+    override public function expectAsync():Function {
+        if(async.scope==null){
+            async.apply(null,new AsyncFrameworkMethod(),executedTestInstance);
+        }
+        return super.expectAsync();
+    }
+
     public function callDoneHandle():void {
-        done();
+        async.scope.done();
     }
 
     public function getDoneHandle():Function {
-        return done;
+        return expectAsync();
     }
 
     public function callAfterTicks(ticks:uint, callable:Function):void {
         afterTick(callable, ticks);
     }
 
+}
+
+class AsyncFrameworkMethod extends FrameworkMethod{
+
+    function AsyncFrameworkMethod(method:Method = null) {
+        super(method);
+    }
+
+    override public function get isAsync():Boolean {
+        return true;
+    }
 }
